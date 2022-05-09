@@ -86,18 +86,18 @@ async function run() {
             res.send(result);
         });
 
-        app.put('/user/:id', async (req, res) => {
+        app.put('/items/:id', async (req, res) => {
             const id = req.params.id;
             const updatedUser = req.body;
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updatedDoc = {
                 $set: {
-                    // name: updatedUser.name,
-                    // price: updatedUser.price
-                    // supplier: updatedUser.supplier
-                    // email: updatedUser.email
-                    // email: updatedUser.email
+                    name: updatedUser.name,
+                    price: updatedUser.price,
+                    supplier: updatedUser.supplier,
+                    quantity: updatedUser.quantity,
+                    description: updatedUser.description
                 }
             };
             const result = await carInventory.updateOne(filter, updatedDoc, options);
