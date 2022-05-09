@@ -8,7 +8,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-
 //use middleware
 app.use(cors());
 app.use(express.json());
@@ -86,10 +85,9 @@ async function run() {
             res.send(result);
         });
         //add products
-        app.post("/addCar", async (req, res) => {
-            const car = req.body;
-            const result = await carInventory.collection("inventory").insertOne(car);
-            console.log("result ", result.insertedId);
+        app.post('/addCar', async (req, res) => {
+            const newCar = req.body;
+            const result = await serviceCollection.insertOne(newCar);
             res.send(result);
         });
 
