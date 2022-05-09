@@ -115,7 +115,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Running my autoRoyal heroku deploy Server');
+    res.send('Running my autoRoyal heroku Server');
 })
 
 app.listen(port, () => {
