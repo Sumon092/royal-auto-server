@@ -59,7 +59,7 @@ async function run() {
             const result = await carInventory.updateOne(filter, updatedDoc, options);
             res.send(result);
         });
-        //insert quantity
+        //update quantity
         app.put("/restock/:id", async (req, res) => {
             const id = req.params.id;
             const inventory = req.body;
@@ -85,25 +85,13 @@ async function run() {
             const result = await carInventory.deleteOne(query);
             res.send(result);
         });
-
-        app.put('/items/:id', async (req, res) => {
-            const id = req.params.id;
-            const updatedUser = req.body;
-            const filter = { _id: ObjectId(id) };
-            const options = { upsert: true };
-            const updatedDoc = {
-                $set: {
-                    name: updatedUser.name,
-                    price: updatedUser.price,
-                    supplier: updatedUser.supplier,
-                    quantity: updatedUser.quantity,
-                    description: updatedUser.description
-                }
-            };
-            const result = await carInventory.updateOne(filter, updatedDoc, options);
+        //add products
+        app.post("/addCar", async (req, res) => {
+            const car = req.body;
+            const result = await carInventory.collection("inventory").insertOne(car);
+            console.log("result ", result.insertedId);
             res.send(result);
-
-        })
+        });
 
     }
     finally {
